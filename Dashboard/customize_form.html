@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customization Form</title>
+    <link rel="stylesheet" href="dbstyle.css">
+    <style>
+        .form-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            background-color: #121212;
+            padding-top: 80px;
+        }
+
+        form {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        form label {
+            color: #b3b3b3;
+            font-size: 16px;
+        }
+
+        form input, form textarea {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        #startBtn {
+            background-color: #1DB954;
+            color: #ffffff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: not-allowed;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        #startBtn:enabled {
+            cursor: pointer;
+            opacity: 1;
+        }
+
+        #startBtn:enabled:hover {
+            background-color: #17a74a;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-header {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .price-info {
+            text-align: center;
+            color: #b3b3b3;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Pangalan ng name</div>
+            <ul>
+                <li><a href="dashboard.html">Home</a></li>
+                <li><a href="#">Customize</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="form-section">
+        <form id="customForm">
+            <div class="form-header">
+                <h1>Information Form</h1>
+                <p>We need a few details to start your customization!</p>
+            </div>
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+
+            <div class="price-info">Cost: 50 pesos (Cash on Delivery)</div>
+
+            <button type="submit" id="startBtn" disabled>Finalize Purchase</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 kung ano man ang name. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById('customForm');
+        const startBtn = document.getElementById('startBtn');
+
+        form.addEventListener('input', () => {
+            const isValid = [...form.elements].every(input => input.value.trim() !== "" || input.tagName === "TEXTAREA");
+            startBtn.disabled = !isValid;
+        });
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Form submitted! Proceeding to customization...');
+            window.location.href = 'customize_form.html';
+        });
+    </script>
+</body>
+</html>
